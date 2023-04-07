@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="style.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style> -->
+    <style>
+        /* Googlefont Poppins CDN Link */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar {
+            position: fixed;
+            height: 100%;
+            width: 240px;
+            background: #0A2558;
+
+        }
+
+        .sidebar.active {
+            width: 60px;
+        }
+
+        .sidebar .logo-details {
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar .logo-details i {
+            font-size: 28px;
+            font-weight: 500;
+            color: #fff;
+            min-width: 60px;
+            text-align: center
+        }
+
+        .sidebar .logo-details .logo_name {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .sidebar .nav-links {
+            margin-top: 10px;
+        }
+
+        .sidebar .nav-links li {
+            position: relative;
+            list-style: none;
+            height: 50px;
+        }
+
+        .sidebar .nav-links li a {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        /* .sidebar .nav-links li a.active {
+            background: #081D45;
+        } */
+
+        .sidebar .nav-links li a:hover {
+            background: #081D45;
+        }
+
+        .sidebar .nav-links li i {
+            min-width: 60px;
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .sidebar .nav-links li a .links_name {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        .sidebar .nav-links .log_out {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .home-section {
+            position: relative;
+            background: #a7bbe0;
+
+            height: 450vh;
+            width: calc(100% - 240px);
+            left: 240px;
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.active~.home-section {
+            width: calc(100% - 60px);
+            left: 60px;
+        }
+
+        .home-section nav {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            width: calc(100% - 240px);
+            left: 240px;
+            z-index: 100;
+            padding: 0 20px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.active~.home-section nav {
+            left: 60px;
+            width: calc(100% - 60px);
+        }
+
+        .home-section nav .sidebar-button {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        nav .sidebar-button i {
+            font-size: 35px;
+            margin-right: 10px;
+        }
+
+        .home-section nav .search-box {
+            position: relative;
+            height: 50px;
+            max-width: 550px;
+            width: 100%;
+            margin: 0 20px;
+        }
+
+        nav .search-box input {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            background: #F5F6FA;
+            border: 2px solid #EFEEF1;
+            border-radius: 6px;
+            font-size: 18px;
+            padding: 0 15px;
+        }
+
+        nav .search-box .bx-search {
+            position: absolute;
+            height: 40px;
+            width: 40px;
+            background: #2697FF;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 4px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 22px;
+            transition: all 0.4 ease;
+        }
+
+        .home-section nav .profile-details {
+            display: flex;
+            align-items: center;
+            background: #F5F6FA;
+            border: 2px solid #EFEEF1;
+            border-radius: 6px;
+            height: 50px;
+            min-width: 190px;
+            padding: 0 15px 0 2px;
+        }
+
+        nav .profile-details img {
+            height: 40px;
+            width: 40px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        nav .profile-details .admin_name {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            margin: 0 10px;
+            white-space: nowrap;
+        }
+
+        nav .profile-details i {
+            font-size: 25px;
+            color: #333;
+        }
+
+        /* navigation bar */
+
+        .container-fluid {
+            position: absolute;
+            background: rgb(196, 155, 235);
+            width: 59%;
+            left: 300px;
+            top: 10rem;
+        }
+
+        .container-fluid .container {
+            border: 2px solid blue;
+            box-sizing: border-box;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+           
+        }
+
+        .container-fluid .container .btn-1 input {
+
+            position: relative;
+            left: 16px;
+            margin-top: 20px;
+            width: 441px;
+            height: 40px;
+            border-radius: 5px;
+            border: none;
+            padding-left:10px ;
+            color: gray;
+            margin-right: 20px;
+
+
+        }
+       
+        .container-fluid .container div h4{
+            position: relative;
+            margin-left: 16px;
+            top: 7px;
+            font-size: 24px;
+            font-weight: 600;
+            color: rgb(83, 38, 38);
+        }
+
+        .container-fluid .container h5 {
+            font-size: larger;
+            font-weight: 600;
+            position: relative;
+            left: 10px;
+            margin-top: 40px;
+        }
+
+        .container-fluid .container .contain {
+            display: flex;
+        }
+
+        .container-fluid .container .contain .image img {
+            width: 300px;
+            margin-top: 20px;
+            border-radius: 5px;
+            margin-left: 8px;
+
+        }
+
+        .container-fluid .container .contain .image div p {
+            position: relative;
+            font-size: medium;
+            font-weight: 700;
+            margin: 10px 0px 0px 20px;
+
+        }
+
+        .container-fluid .container .contain .image .available {
+            color: gray;
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        .container-fluid .container .contain .image .price {
+            margin-left: 20px;
+            color: #195ddc;
+            margin-top: 10px;
+        }
+
+        .container-fluid .container .contain .image div .btn-3 {
+            width: 60px;
+            display: flex;
+            padding-left: 7px;
+            padding-top: 4px;
+            height: 30px;
+            margin-left: 20px;
+            margin-top: 10px;
+            background: rgb(209, 208, 208);
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
+
+        }
+        .container-fluid .container .contain .image div .btn-3 svg{
+            position: relative;
+            left: 20px;
+            top: 2px;
+            color: black;
+            padding: 1px;
+        }
+        .container-fluid .container .contain .image div .btn-3 svg:hover{
+            background: rgb(131, 124, 124);
+            border-radius: 50%;
+            border: 2px solid black;
+           
+        }
+
+        .container-fluid .container .man-shirt {
+            font-size: larger;
+            margin-top: 40px;
+            margin-left: 13px;
+            font-weight: 700;
+        }
+
+        .container-fluid .container .line {
+            color: gray;
+            width: 90rem;
+            margin-left: 13px;
+            margin-bottom: -20px;
+            background: gray;
+        }
+
+        .container-fluid .container .coupon h5 {
+            position: relative;
+            bottom: -7px;
+            margin-top: 50px;
+            margin-left: 17px;
+            font-weight: 500;
+        }
+
+        .container-fluid .container .card input {
+            margin-left: 15px;
+            padding: 6px;
+            border: 2px solid white;
+            border-radius: 5px;
+        }
+
+        .container-fluid .container .btn-4 button {
+            position: absolute;
+            height: 37px;
+            width: 70px;
+            margin-left: 2px;
+            background: rgb(81, 81, 235);
+            border: 2px solid blue;
+            border-radius: 5px;
+            color: gray;
+            font-size: medium;
+        }
+
+        .container-fluid .container .coupon1 h5 {
+            position: relative;
+            font-size: 20px;
+            margin-top: 80px;
+            margin-left: 17px;
+
+        }
+
+        .container-fluid .container .personal-details {
+            margin-left: 15px;
+            margin-bottom: 30px;
+
+
+        }
+
+        .container-fluid .container .personal-details input {
+            width: 300px;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            background: rgb(169, 110, 225);
+            color: rgb(242, 242, 242);
+        }
+
+        .container-fluid .container .card-details input {
+            width: 604px;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            background: rgb(169, 110, 225);
+            color: rgb(242, 242, 242);
+            margin-top: 8px;
+            margin-left: 15px;
+
+        }
+
+        .container-fluid .container .shipping {
+            font-size: 20px;
+            margin-left: 15px;
+            margin-top: 40px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .container-fluid .container .address1 input {
+            margin-left: 15px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            width: 604px;
+            font-size: large;
+            background: rgb(169, 110, 225);
+            color: rgb(242, 242, 242);
+        }
+
+        .container-fluid .container .city-details input {
+            width: 295px;
+            margin-left: 15px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            font-size: large;
+            background: rgb(169, 110, 225);
+            color: rgb(242, 242, 242);
+
+        }
+
+        .container-fluid .container .postal input {
+            margin-top: 10px;
+            margin-left: 15px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            width: 604px;
+            font-size: large;
+            background: rgb(169, 110, 225);
+            color: rgb(242, 242, 242);
+
+        }
+
+        .container-fluid .container .email {
+            font-size: 20px;
+            margin-left: 17px;
+            margin-top: 40px;
+            font-weight: 600;
+            margin-bottom: 6px;
+
+        }
+
+        .container-fluid .container .gmail input {
+            margin-top: -7px;
+            margin-left: 15px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            width: 604px;
+            font-size: large;
+            background: rgb(169, 110, 225);
+            color: rgb(242, 242, 242);
+
+        }
+
+        .container-fluid .container div p {
+            margin-left: 15px;
+        }
+
+        .container-fluid .container .example {
+            margin-left: 15px;
+            color: rgb(115, 110, 110);
+            font-size: small;
+            margin-bottom: 40px;
+        }
+
+        .container-fluid .container .btn-5 button {
+            width: 294px;
+            margin-left: 15px;
+            height: 70px;
+            margin-bottom: 40px;
+            font-size: larger;
+            color: gray;
+            border-radius: 5px;
+            border: none;
+        }
+         /* Responsive Media Query */
+         @media (max-width: 1240px) {
+            .sidebar {
+                width: 60px;
+            }
+
+            .sidebar.active {
+                width: 220px;
+            }
+
+            .home-section {
+                width: calc(100% - 60px);
+                left: 60px;
+            }
+
+            .sidebar.active~.home-section {
+                /* width: calc(100% - 220px); */
+                overflow: hidden;
+                left: 220px;
+            }
+
+            .home-section nav {
+                width: calc(100% - 60px);
+                left: 60px;
+            }
+
+            .sidebar.active~.home-section nav {
+                width: calc(100% - 220px);
+                left: 220px;
+            }
+        }
+
+        @media (max-width: 1150px) {
+            .home-content .sales-boxes {
+                flex-direction: column;
+            }
+
+            .home-content .sales-boxes .box {
+                width: 100%;
+                overflow-x: scroll;
+                margin-bottom: 30px;
+            }
+
+            .home-content .sales-boxes .top-sales {
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .overview-boxes .box {
+                width: calc(100% / 2 - 15px);
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            nav .sidebar-button .dashboard,
+            nav .profile-details .admin_name,
+            nav .profile-details i {
+                display: none;
+            }
+
+            .home-section nav .profile-details {
+                height: 50px;
+                min-width: 40px;
+            }
+
+            .home-content .sales-boxes .sales-details {
+                width: 560px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .overview-boxes .box {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .sidebar.active~.home-section nav .profile-details {
+                display: none;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .sidebar {
+                width: 0;
+            }
+
+            .sidebar.active {
+                width: 60px;
+            }
+
+            .home-section {
+                width: 100%;
+                left: 0;
+            }
+
+            .sidebar.active~.home-section {
+                left: 60px;
+                width: calc(100% - 60px);
+            }
+
+            .home-section nav {
+                width: 100%;
+                left: 0;
+            }
+
+            .sidebar.active~.home-section nav {
+                left: 60px;
+                width: calc(100% - 60px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxl-c-plus-plus'></i>
+            <span class="logo_name">Coder</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="index.html" class="active">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="product.html">
+                    <i class='bx bx-box'></i>
+                    <span class="links_name">Product</span>
+                </a>
+            </li>
+            <li>
+                <a href="order.html">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">Order list</span>
+                </a>
+            </li>
+            <li>
+                <a href="analytics.html">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span class="links_name">Analytics</span>
+                </a>
+            </li>
+            <li>
+                <a href="stock.html">
+                    <i class='bx bx-coin-stack'></i>
+                    <span class="links_name">Stock</span>
+                </a>
+            </li>
+            <li>
+                <a href="total_order.html">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Total order</span>
+                </a>
+            </li>
+            <li>
+                <a href="team.html">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Team</span>
+                </a>
+            </li>
+            <li>
+                <a href="message.html">
+                    <i class='bx bx-message'></i>
+                    <span class="links_name">Messages</span>
+                </a>
+            </li>
+            <li>
+                <a href="favorites.html">
+                    <i class='bx bx-heart'></i>
+                    <span class="links_name">Favorites</span>
+                </a>
+            </li>
+            
+            <li class="log_out">
+                <a href="login.html">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Dashboard</span>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search...">
+                <i class='bx bx-search'></i>
+            </div>
+            <div class="profile-details">
+                <img src="image/profile.jpg" alt="">
+                <span class="admin_name">Vijay Prajapati</span>
+                <i class='bx bx-chevron-down'></i>
+            </div>
+        </nav>
+
+        <!-- stock of product code -->
+
+        <div class="container-fluid">
+            <div class="container">
+                <div>
+                    <h4> My Stock Product</h4>
+                </div>
+                <span class="btn-1"><input type="text" placeholder="Search"><input class="btn-2" type="text"
+                        placeholder="Category : All"> </span>
+                <div>
+                    <h5>Shoes</h5>
+                </div>
+                <div class="line">
+                    <hr>
+                </div>
+                <div class="contain">
+                    <div class="image"><img src="image/addidas.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/addidas.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/addidas.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+                </div>
+
+                <div class="contain">
+                    <div class="image"><img src="image/addidas.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/addidas.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/addidas.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+                </div>
+
+                <!-- white short for man of coding -->
+                <div class="man-shirt"> Bilack Wear's Shirt </div>
+                <div class="line">
+                    <hr>
+                </div>
+                <div class="contain">
+
+                    <div class="image"><img src="image/shirt.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/shirt.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/shirt.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+                </div>
+                <div class="contain">
+
+                    <div class="image"><img src="image/shirt.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/shirt.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/shirt.jpg" alt="">
+                        <div>
+                            <p>Addodas shoe</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+                </div>
+
+
+                <!-- vitton sunglasses codeing and third container -->
+                <div class="man-shirt"> Vitton Sunglasses </div>
+                <div class="line">
+                    <hr>
+                </div>
+                <div class="contain">
+
+                    <div class="image"><img src="image/sunglasses.jpg" alt="">
+                        <div>
+                            <p>vitton Sunglasses</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/sunglasses.jpg" alt="">
+                        <div>
+                            <p>vitton Sunglasses</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/sunglasses.jpg" alt="">
+                        <div>
+                            <p>vitton Sunglasses</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+                </div>
+                <div class="contain">
+
+                    <div class="image"><img src="image/sunglasses.jpg" alt="">
+                        <div>
+                            <p>vitton Sunglasses</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/sunglasses.jpg" alt="">
+                        <div>
+                            <p>vitton Sunglasses</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+
+                    <div class="image"><img src="image/sunglasses.jpg" alt="">
+                        <div>
+                            <p>vitton Sunglasses</p>
+                        </div>
+                        <div class="available">3 available</div>
+                        <div class="price">$11.00</div>
+                        <div class="available">Quantity</div>
+                        <div><button class="btn-3">1<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg></button></div>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <hr>
+                </div>
+                <div class="coupon">
+                    <h5>Enter coupon</h5>
+                </div>
+                <span class="card"><input type="text" placeholder="Enter Coupon Code"></span>
+                <span class="btn-4"><button>Apply</button></span>
+                <div class="line">
+                    <hr>
+                </div>
+
+                <div class="coupon1">
+                    <h5>Credit Card</h5>
+                </div>
+                <span class="personal-details"><input type="text" placeholder="First Name"> <input type="text"
+                        placeholder="Last Name"></span>
+                <div class="card-details"><input type="text" placeholder="Card Number"></div>
+
+
+                <div class="shipping">Shipping Address</div>
+                <div class="address1"><input type="text" placeholder="Street Address"></div>
+                <div>
+                    <p>Street Address</p>
+                </div>
+                <div class="address1"><input type="text" placeholder="Street Address"></div>
+                <div>
+                    <p>Street Address Line 2</p>
+                </div>
+                <span class="city-details"><input type="text" placeholder="City"><input type="text"
+                        placeholder="State / Province"></span>
+                <div class="postal"><input type="text" placeholder="Postal / Zip Code"></div>
+                <div>
+                    <p>Postal/Zip Code</p>
+                </div>
+                <div class="email">Email</div>
+                <div class="gmail"><input type="text" placeholder="Email"></div>
+                <div class="example">example@gmail.com</div>
+                <span class="btn-5"><button>Submit</button> <button>Cancel</button></span>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </section>
+
+
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        sidebarBtn.onclick = function () {
+            sidebar.classList.toggle("active");
+            if (sidebar.classList.contains("active")) {
+                sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            } else
+                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    </script>
+
+</body>
+
+</html>
