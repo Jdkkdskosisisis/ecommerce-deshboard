@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="style.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+    <style>
+        /* Googlefont Poppins CDN Link */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar {
+            position: fixed;
+            height: 100%;
+            width: 240px;
+            background: #0A2558;
+
+        }
+
+        .sidebar.active {
+            width: 60px;
+        }
+
+        .sidebar .logo-details {
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar .logo-details i {
+            font-size: 28px;
+            font-weight: 500;
+            color: #fff;
+            min-width: 60px;
+            text-align: center
+        }
+
+        .sidebar .logo-details .logo_name {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .sidebar .nav-links {
+            margin-top: 10px;
+        }
+
+        .sidebar .nav-links li {
+            position: relative;
+            list-style: none;
+            height: 50px;
+        }
+
+        .sidebar .nav-links li a {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        /* .sidebar .nav-links li a.active {
+            background: #081D45;
+        } */
+
+        .sidebar .nav-links li a:hover {
+            background: #081D45;
+        }
+
+        .sidebar .nav-links li i {
+            min-width: 60px;
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .sidebar .nav-links li a .links_name {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        .sidebar .nav-links .log_out {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .home-section {
+            position: relative;
+            background: #a7bbe0;
+            height: 170vh;
+            width: calc(100% - 240px);
+            left: 240px;
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.active~.home-section {
+            width: calc(100% - 60px);
+            left: 60px;
+        }
+
+        .home-section nav {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            width: calc(100% - 240px);
+            left: 240px;
+            z-index: 100;
+            padding: 0 20px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.active~.home-section nav {
+            left: 60px;
+            width: calc(100% - 60px);
+        }
+
+        .home-section nav .sidebar-button {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        nav .sidebar-button i {
+            font-size: 35px;
+            margin-right: 10px;
+        }
+
+        .home-section nav .search-box {
+            position: relative;
+            height: 50px;
+            max-width: 550px;
+            width: 100%;
+            margin: 0 20px;
+        }
+
+        nav .search-box input {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            background: #F5F6FA;
+            border: 2px solid #EFEEF1;
+            border-radius: 6px;
+            font-size: 18px;
+            padding: 0 15px;
+        }
+
+        nav .search-box .bx-search {
+            position: absolute;
+            height: 40px;
+            width: 40px;
+            background: #2697FF;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 4px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 22px;
+            transition: all 0.4 ease;
+        }
+
+        .home-section nav .profile-details {
+            display: flex;
+            align-items: center;
+            background: #F5F6FA;
+            border: 2px solid #EFEEF1;
+            border-radius: 6px;
+            height: 50px;
+            min-width: 190px;
+            padding: 0 15px 0 2px;
+        }
+
+        nav .profile-details img {
+            height: 40px;
+            width: 40px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        nav .profile-details .admin_name {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            margin: 0 10px;
+            white-space: nowrap;
+        }
+
+        nav .profile-details i {
+            font-size: 25px;
+            color: #333;
+        }
+
+        /*product card first for shoes */
+
+        a,
+        a:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .section-products {
+            padding: 80px 0 54px;
+
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .section-products .header {
+            margin-bottom: 50px;
+        }
+
+        .section-products .header h3 {
+            font-size: 1rem;
+            color: #fe302f;
+            font-weight: 500;
+        }
+
+        .section-products .header h2 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #444444;
+        }
+
+        .section-products .single-product {
+            margin-bottom: 26px;
+        }
+
+        .section-products .single-product .part-1 {
+            position: relative;
+            height: 290px;
+            max-height: 290px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .section-products .single-product .part-1::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            transition: all 0.3s;
+        }
+
+        .section-products .single-product:hover .part-1::before {
+            transform: scale(1.2, 1.2) rotate(5deg);
+        }
+
+        /* .section-products #product-1 .part-1::before {
+            background-image: url("https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/bf0c5ddb-53bb-498e-932e-2fd0a0ff3a13/downshifter-12-road-running-shoes-kQLnZn.png") no-repeat center;
+            background-size: cover;
+            transition: all 0.3s;
+        } */
+
+        .section-products #product-1 .part-1 span img {
+            width: 307px;
+            height: 290px;
+        }
+
+        .section-products #product-2 .part-1 span img {
+            width: 307px;
+            height: 290px;
+        }
+
+        .section-products #product-3 .part-1 span img {
+            width: 307px;
+            height: 290px;
+        }
+
+        .section-products #product-4 .part-1 span img {
+            width: 307px;
+            height: 290px;
+        }
+
+        .section-products .single-product .part-1 .discount,
+        .section-products .single-product .part-1 .new {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: #ffffff;
+            background-color: #fe302f;
+            padding: 2px 8px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .section-products .single-product .part-1 .new {
+            left: 0;
+            background-color: #444444;
+        }
+
+        .section-products .single-product .part-1 ul {
+            position: absolute;
+            bottom: -41px;
+            left: 20px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            opacity: 0;
+            transition: bottom 0.5s, opacity 0.5s;
+        }
+
+        .section-products .single-product:hover .part-1 ul {
+            bottom: 30px;
+            opacity: 1;
+        }
+
+        .section-products .single-product .part-1 ul li {
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .section-products .single-product .part-1 ul li a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #ffffff;
+            color: #444444;
+            text-align: center;
+            box-shadow: 0 2px 20px rgb(50 50 50 / 10%);
+            transition: color 0.2s;
+        }
+
+        .section-products .single-product .part-1 ul li a:hover {
+            color: #fe302f;
+        }
+
+        .section-products .single-product .part-2 .product-title {
+            font-size: 1rem;
+        }
+
+        .section-products .single-product .part-2 h4 {
+            display: inline-block;
+            font-size: 1rem;
+        }
+
+        .section-products .single-product .part-2 .product-old-price {
+            position: relative;
+            padding: 0 7px;
+            margin-right: 2px;
+            opacity: 0.6;
+        }
+
+        .section-products .single-product .part-2 .product-old-price::after {
+            position: absolute;
+            content: "";
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #444444;
+            transform: translateY(-50%);
+        }
+
+        /* second product css */
+
+        .container3 .product-grid {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+        }
+
+        .container3 .product-grid .product-image {
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            margin-right: 20px;
+        }
+
+        .container3 .product-grid .product-image a.image {
+            display: block;
+        }
+
+        .container3 .product-grid .product-image img {
+            width: 50%;
+            height: auto;
+
+        }
+
+        .container3 .product-grid .product-discount-label {
+            color: #fff;
+            background: #A5BA8D;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 25px;
+            padding: 0 7px;
+            position: absolute;
+            top: 10px;
+            left: 0;
+            margin-left: 120px;
+        }
+
+        .container3 .product-grid .product-links {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            position: absolute;
+            top: 10px;
+            right: -50px;
+            transition: all .5s ease 0s;
+        }
+
+        .container3 .product-grid:hover .product-links {
+            right: 120px;
+
+
+        }
+
+        .container3 .product-grid .product-links li a {
+            color: #333;
+            background: transparent;
+            font-size: 17px;
+            line-height: 38px;
+            width: 38px;
+            height: 38px;
+            border: 1px solid #333;
+            border-bottom: none;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        .container3 .product-content {
+            width: 234px;
+            margin-left: 115px;
+        }
+
+        .container3 .product-grid .product-links li:last-child a {
+            border-bottom: 1px solid #333;
+        }
+
+        .container3 .product-grid .product-links li a:hover {
+            color: #fff;
+            background: #333;
+        }
+
+        .container3 .product-grid .add-to-cart {
+            background: #A5BA8D;
+            color: #fff;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            width: 50%;
+            padding: 10px 26px;
+            position: absolute;
+            left: 0;
+            margin-left: 115px;
+            bottom: -60px;
+            transition: all 0.3s ease 0s;
+        }
+
+        .container3 .product-grid:hover .add-to-cart {
+            bottom: 0;
+        }
+
+        .container3 .product-grid .add-to-cart:hover {
+            text-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .container3 .product-grid .product-content {
+            background: #fff;
+            padding: 15px;
+            box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1) inset;
+        }
+
+        .container3 .product-grid .title {
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: capitalize;
+            margin: 0 0 7px;
+        }
+
+        .container3 .product-grid .title a {
+            color: #777;
+            transition: all 0.3s ease 0s;
+        }
+
+        .container3 .product-grid .title a:hover {
+            color: #a5ba8d;
+        }
+
+        .container3 .product-grid .price {
+            color: #0d0d0d;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .container3 .product-grid .price span {
+            color: #888;
+            font-size: 13px;
+            font-weight: 400;
+            text-decoration: line-through;
+        }
+
+        @media screen and (max-width: 990px) {
+            .product-grid {
+                margin-bottom: 30px;
+            }
+        }
+
+        .container3 .row {
+            display: flex;
+
+            margin-left: 284px;
+            margin-right: -545px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxl-c-plus-plus'></i>
+            <span class="logo_name">Coder</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="index.html" class="active">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="product.html">
+                    <i class='bx bx-box'></i>
+                    <span class="links_name">Product</span>
+                </a>
+            </li>
+            <li>
+                <a href="order.html">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">Order list</span>
+                </a>
+            </li>
+            <li>
+                <a href="analytics.html">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span class="links_name">Analytics</span>
+                </a>
+            </li>
+            <li>
+                <a href="stock.html">
+                    <i class='bx bx-coin-stack'></i>
+                    <span class="links_name">Stock</span>
+                </a>
+            </li>
+            <li>
+                <a href="total_order.html">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Total order</span>
+                </a>
+            </li>
+            <li>
+                <a href="team.html">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Team</span>
+                </a>
+            </li>
+            <li>
+                <a href="message.html">
+                    <i class='bx bx-message'></i>
+                    <span class="links_name">Messages</span>
+                </a>
+            </li>
+            <li>
+                <a href="favorites.html">
+                    <i class='bx bx-heart'></i>
+                    <span class="links_name">Favorites</span>
+                </a>
+            </li>
+           
+            <li class="log_out">
+                <a href="login.html">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Dashboard</span>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search...">
+                <i class='bx bx-search'></i>
+            </div>
+            <div class="profile-details">
+                <img src="image/profile.jpg" alt="">
+                <span class="admin_name">Vijay Prajapati</span>
+                <i class='bx bx-chevron-down'></i>
+            </div>
+        </nav>
+
+        <section class="section-products">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="header">
+
+                            <h2>Popular Products</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Single Product -->
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div id="product-1" class="single-product">
+
+                            <div class="part-1">
+                                <span class="image"> <img
+                                        src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c2hvZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                                        alt=""></span>
+                                <ul>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-arrows-angle-expand"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+                                            </svg></a></li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">Nike Sport Shoe</h3>
+                                <h4 class="product-old-price">$79.99</h4>
+                                <h4 class="product-price">$49.99</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Product -->
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div id="product-2" class="single-product">
+                            <div class="part-1">
+                                <span><img
+                                        src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c2hvZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                                        alt=""></span>
+                                <span class="discount">15% off</span>
+                                <ul>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-arrows-angle-expand"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+                                            </svg></a></li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">Nike Sport Shoe</h3>
+                                <h4 class="product-price">$49.99</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Product -->
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div id="product-3" class="single-product">
+                            <div class="part-1">
+                                <span><img
+                                        src="https://images.unsplash.com/photo-1543508282-6319a3e2621f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                                        alt=""></span>
+                                <ul>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-arrows-angle-expand"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+                                            </svg></a></li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">Compuse Sport shoe</h3>
+                                <h4 class="product-old-price">$79.99</h4>
+                                <h4 class="product-price">$49.99</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Product -->
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div id="product-4" class="single-product">
+                            <div class="part-1">
+                                <span><img
+                                        src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                                        alt=""></span>
+                                <span class="new">new</span>
+                                <ul>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-arrows-angle-expand"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+                                            </svg></a></li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">Compase Sport Shoe</h3>
+                                <h4 class="product-price">$49.99</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Product -->
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div id="product-1" class="single-product">
+                            <div class="part-1">
+                                <span><img
+                                        src="https://images.unsplash.com/photo-1562183241-b937e95585b6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                                        alt=""></span>
+                                <ul>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-arrows-angle-expand"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+                                            </svg></a></li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">Sport Shoes</h3>
+                                <h4 class="product-old-price">$79.99</h4>
+                                <h4 class="product-price">$49.99</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Product -->
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div id="product-2" class="single-product">
+                            <div class="part-1">
+                                <span><img
+                                        src="https://images.unsplash.com/photo-1562183241-b937e95585b6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                                        alt=""></span>
+                                <span class="discount">15% off</span>
+                                <ul>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-arrows-angle-expand"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+                                            </svg></a></li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">Child Shoes</h3>
+                                <h4 class="product-price">$49.99</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Product -->
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div id="product-3" class="single-product">
+                            <div class="part-1">
+                                <span><img
+                                        src="https://plus.unsplash.com/premium_photo-1672883552545-0fd585304fad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                                        alt=""></span>
+                                <ul>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-arrows-angle-expand"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+                                            </svg></a></li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">Women Shoe</h3>
+                                <h4 class="product-old-price">$79.99</h4>
+                                <h4 class="product-price">$49.99</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Product -->
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div id="product-4" class="single-product">
+                            <div class="part-1">
+                                <span><img
+                                        src="https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                                        alt=""></span>
+                                <span class="new">new</span>
+                                <ul>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                                            </svg></a></li>
+                                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                fill="currentColor" class="bi bi-arrows-angle-expand"
+                                                viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+                                            </svg></a></li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">Man Shoes </h3>
+                                <h4 class="product-price">$49.99</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- second product  -->
+
+        <div class="container3">
+            <div class="row">
+                <div id="block" class="col-md-3 col-sm-6 block " style=" margin-right: -223px;
+            margin-left: -223px;
+          ">
+                    <div class="product-grid">
+                        <div class="product-image">
+                            <a href="#" class="image">
+                                <img
+                                    src="https://assets.ajio.com/medias/sys_master/root/20220819/Qm9w/62fe856aaeb269176183efe0/-473Wx593H-461124702-black-MODEL.jpg">
+                            </a>
+                            <span class="product-discount-label">-23%</span>
+                            <ul class="product-links">
+                                <li><a href="#"><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-random"></i></a></li>
+                            </ul>
+                            <a href="" class="add-to-cart">Add to Cart</a>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="title"><a href="#">Women's Blouse Top</a></h3>
+                            <div class="price">$53.55 <span>$68.88</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="product-grid">
+                        <div class="product-image">
+                            <a href="#" class="image">
+                                <img
+                                    src="https://assets.ajio.com/medias/sys_master/root/20220608/hr4e/62a0c446aeb26921af179a29/-473Wx593H-441142660-black-MODEL.jpg">
+                            </a>
+                            <ul class="product-links">
+                                <li><a href="#"><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-random"></i></a></li>
+                            </ul>
+                            <a href="" class="add-to-cart">Add to Cart</a>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="title"><a href="#">Men's Jacket</a></h3>
+                            <div class="price">$75.55</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6" style=" margin-right: -223px;
+                  margin-left: -223px;">
+                    <div class="product-grid">
+                        <div class="product-image">
+                            <a href="#" class="image">
+                                <img
+                                    src="https://assets.ajio.com/medias/sys_master/root/20220606/SAip/629e1bc3aeb26921af11c1c0/-473Wx593H-441166719-black-MODEL.jpg">
+                            </a>
+                            <ul class="product-links">
+                                <li><a href="#"><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-random"></i></a></li>
+                            </ul>
+                            <a href="" class="add-to-cart">Add to Cart</a>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="title"><a href="#">Men's Jacket</a></h3>
+                            <div class="price">$75.55</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="product-grid">
+                        <div class="product-image">
+                            <a href="#" class="image">
+                                <img
+                                    src="https://assets.ajio.com/medias/sys_master/root/20220531/MyBf/62958362f997dd03e24d8f88/-473Wx593H-441138138-red-MODEL.jpg">
+                            </a>
+                            <ul class="product-links">
+                                <li><a href="#"><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-random"></i></a></li>
+                            </ul>
+                            <a href="" class="add-to-cart">Add to Cart</a>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="title"><a href="#">Men's Jacket</a></h3>
+                            <div class="price">$75.55</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6" style=" margin-right: -223px;
+                margin-left: -223px;">
+                    <div class="product-grid">
+                        <div class="product-image">
+                            <a href="#" class="image">
+                                <img
+                                    src="https://assets.ajio.com/medias/sys_master/root/20220606/SAip/629e1bc3aeb26921af11c1c0/-473Wx593H-441166719-black-MODEL.jpg">
+                            </a>
+                            <ul class="product-links">
+                                <li><a href="#"><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-random"></i></a></li>
+                            </ul>
+                            <a href="" class="add-to-cart">Add to Cart</a>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="title"><a href="#">Men's Jacket</a></h3>
+                            <div class="price">$75.55</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        sidebarBtn.onclick = function () {
+            sidebar.classList.toggle("active");
+            if (sidebar.classList.contains("active")) {
+                sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            } else
+                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    </script>
+</body>
+
+</html>
